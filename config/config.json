@@ -3,7 +3,7 @@
   "Port": "5432",
   "Dbname": "users_movies_db",
   "Sslmode": "disable",
-  "User": "ivan_ivanov",
+  "User": "postgres",
   "Password": "",
   "SessionKeysPath": "contrib/sessionKeys"
 }
