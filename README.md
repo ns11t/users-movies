@@ -24,6 +24,7 @@ All server parameters are stored in config/config.json
 ```
 
 Host, Port, Dbname, Sslmode, User and Password are used for database connection.
+Empty database should be created before the server launching.
 SessionKeysPath is a path to a directory where RSA keys are stored.
 They could be generated using following commands:
 
