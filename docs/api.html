@@ -1,0 +1,329 @@
+<!DOCTYPE HTML><html><head><title>Users-Movies API documentation</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="generator" content="https://github.com/raml2html/raml2html 4.0.0"><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/styles/default.min.css"><script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script><script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script><script type="text/javascript">
+      $(document).ready(function() {
+        $('.page-header pre code, .top-resource-description pre code, .modal-body pre code').each(function(i, block) {
+          hljs.highlightBlock(block);
+        });
+
+        $('[data-toggle]').click(function() {
+          var selector = $(this).data('target') + ' pre code';
+          $(selector).each(function(i, block) {
+            hljs.highlightBlock(block);
+          });
+        });
+
+        // open modal on hashes like #_action_get
+        $(window).bind('hashchange', function(e) {
+          var anchor_id = document.location.hash.substr(1); //strip #
+          var element = $('#' + anchor_id);
+
+          // do we have such element + is it a modal?  --> show it
+          if (element.length && element.hasClass('modal')) {
+            element.modal('show');
+          }
+        });
+
+        // execute hashchange on first page load
+        $(window).trigger('hashchange');
+
+        // remove url fragment on modal hide
+        $('.modal').on('hidden.bs.modal', function() {
+          try {
+            if (history && history.replaceState) {
+                history.replaceState({}, '', '#');
+            }
+          } catch(e) {}
+        });
+      });
+    </script><style>
+      .hljs {
+        background: transparent;
+      }
+      .parent {
+        color: #999;
+      }
+      .list-group-item > .badge {
+        float: none;
+        margin-right: 6px;
+      }
+      .panel-title > .methods {
+        float: right;
+      }
+      .badge {
+        border-radius: 0;
+        text-transform: uppercase;
+        width: 70px;
+        font-weight: normal;
+        color: #f3f3f6;
+        line-height: normal;
+      }
+      .badge_get {
+        background-color: #63a8e2;
+      }
+      .badge_post {
+        background-color: #6cbd7d;
+      }
+      .badge_put {
+        background-color: #22bac4;
+      }
+      .badge_delete {
+        background-color: #d26460;
+      }
+      .badge_patch {
+        background-color: #ccc444;
+      }
+      .list-group, .panel-group {
+        margin-bottom: 0;
+      }
+      .panel-group .panel+.panel-white {
+        margin-top: 0;
+      }
+      .panel-group .panel-white {
+        border-bottom: 1px solid #F5F5F5;
+        border-radius: 0;
+      }
+      .panel-white:last-child {
+        border-bottom-color: white;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+      }
+      .panel-white .panel-heading {
+        background: white;
+      }
+      .tab-pane ul {
+        padding-left: 2em;
+      }
+      .tab-pane h1 {
+        font-size: 1.3em;
+      }
+      .tab-pane h2 {
+        font-size: 1.2em;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #ddd;
+      }
+      .tab-pane h3 {
+        font-size: 1.1em;
+      }
+      .tab-content {
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+      }
+      #sidebar {
+        margin-top: 30px;
+        padding-right: 5px;
+        overflow: auto;
+        height: 90%;
+      }
+      .top-resource-description {
+        border-bottom: 1px solid #ddd;
+        background: #fcfcfc;
+        padding: 15px 15px 0 15px;
+        margin: -15px -15px 10px -15px;
+      }
+      .resource-description {
+        border-bottom: 1px solid #fcfcfc;
+        background: #fcfcfc;
+        padding: 15px 15px 0 15px;
+        margin: -15px -15px 10px -15px;
+      }
+      .resource-description p:last-child {
+        margin: 0;
+      }
+      .list-group .badge {
+        float: left;
+      }
+      .method_description {
+        margin-left: 85px;
+      }
+      .method_description p:last-child {
+        margin: 0;
+      }
+      .list-group-item {
+        cursor: pointer;
+      }
+      .list-group-item:hover {
+        background-color: #f5f5f5;
+      }
+      pre code {
+        overflow: auto;
+        word-wrap: normal;
+        white-space: pre;
+      }
+      .items {
+        background: #f5f5f5;
+        color: #333;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 9.5px;
+        margin: 0 0 10px;
+        font-size: 13px;
+        line-height: 1.42857143;
+      }
+    </style></head><body data-spy="scroll" data-target="#sidebar"><div class="container"><div class="row"><div class="col-md-9" role="main"><div class="page-header"><h1>Users-Movies API documentation <small>version v1</small></h1><p>http://{host}:{port}/api/{version}</p><ul><li><strong>host</strong>: <em>required (string)</em></li><li><strong>port</strong>: <em>required (string)</em></li><li><strong>version</strong>: <em>required (v1)</em></li></ul></div><div class="panel panel-default"><div class="panel-heading"><h3 id="session" class="panel-title">/session</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_session"><span class="parent"></span>/session</a> <span class="methods"><a href="#session_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_session" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#session_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Generate new user token</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="session_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/session</h4></div><div class="modal-body"><div class="alert alert-info"><p>Generate new user token</p></div><ul class="nav nav-tabs"><li class="active"><a href="#session_post_request" data-toggle="tab">Request</a></li><li><a href="#session_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="session_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Examples</strong>:</p><pre><code>{
+  "login": "login_for_new_user_123",
+  "password": "psWd45125-Akb"
+}</code></pre></div><div class="tab-pane" id="session_post_response"><h2>HTTP status code <a href="http://httpstatus.es/201" target="_blank">201</a></h2><p>New token generated</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Examples</strong>:</p><pre><code>{
+  "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0ODEyMDQyMjksInVzZXJpZCI6InRlc3RfbG9naW41YTExMjMxIn0.qpcDzeclvUl421YoU5OH8A1-mC6uul44OOdS9f0MN4R-oWgHEmDuuevUkQU4RbvBYKg1-FE_F7bhqL9O4dNodmTXhSy7-NL8Nzc_tnd1Y2gPsPIwOSTi38UphOirK2WsSv340KyFmfdr3uHOgRlBpGEGSTQaJdnmv5L3zCKvA1qLT4HKaZuOjlrym4HR7Ho3rsuGvu88rFHUjUebYZ9sYZMhZCZteM7FcOU3xEkt0r5JoJ_YJTNGSHv8BrodZsxhDV6WfyzrxaASDk__jfidofC9rfW5hKUzwb9tKB6MPd8oS-1YPFSV80dkU6XoCjLDAfViriIpko-jESN1uIhf6Q"
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><p>Incorrect user model</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Examples</strong>:</p><pre><code>{
+  "msg": "bad_user_model",
+  "success": false
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>Given password is incorrect</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Examples</strong>:</p><pre><code>{
+  "msg": "user_incorrect_password",
+  "success": false
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>User is not registered yet</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Examples</strong>:</p><pre><code>{
+  "msg": "user_not_found",
+  "success": false
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Examples</strong>:</p><pre><code>{
+  "msg": "internal_server_error",
+  "success": false
+}</code></pre></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="movies" class="panel-title">/movies</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_movies"><span class="parent"></span>/movies</a> <span class="methods"><a href="#movies_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_movies" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#movies_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Search movies by genre or year</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="movies_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/movies</h4></div><div class="modal-body"><div class="alert alert-info"><p>Search movies by genre or year</p></div><ul class="nav nav-tabs"><li class="active"><a href="#movies_get_request" data-toggle="tab">Request</a></li><li><a href="#movies_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="movies_get_request"><h3>Query Parameters</h3><ul><li><strong>genres</strong>: <em>(string)</em><p>Comma-separated list of movie genres</p></li><li><strong>year</strong>: <em>(number)</em><p>Integer value of movie&#39;s year</p></li><li><strong>offset</strong>: <em>(integer - default: 0)</em><p>Skip over a number of elements by specifying an offset value for the query</p></li><li><strong>limit</strong>: <em>(integer - default: 10)</em><p>Limit the number of elements on the response</p></li></ul></div><div class="tab-pane" id="movies_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Search results returned with success code.</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Examples</strong>:</p><pre><code>{
+  "items": [
+    {
+      "id": 1,
+      "name": "Allied",
+      "year": 1999,
+      "genre": "Adventure"
+    },
+    {
+      "id": 2,
+      "name": "Moana",
+      "year": 2004,
+      "genre": "Crime"
+    },
+    {
+      "id": 3,
+      "name": "Fantastic Beasts and Where to Find Them",
+      "year": 1999,
+      "genre": "Drama"
+    },
+    {
+      "id": 4,
+      "name": "Underworld: Blood Wars",
+      "year": 1973,
+      "genre": "Historical"
+    },
+    {
+      "id": 5,
+      "name": "Bad Santa 2",
+      "year": 1999,
+      "genre": "Historical"
+    },
+    {
+      "id": 6,
+      "name": "Incarnate",
+      "year": 2016,
+      "genre": "Paranoid"
+    }
+  ],
+  "limit": 10,
+  "offset": 0,
+  "success": true,
+  "total": 6
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><p>Year parameter value should be integer</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Examples</strong>:</p><pre><code>{
+  "msg": "bad_movie_year_format",
+  "success": false
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Examples</strong>:</p><pre><code>{
+  "msg": "internal_server_error",
+  "success": false
+}</code></pre></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="users" class="panel-title">/users</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_users"><span class="parent"></span>/users</a> <span class="methods"><a href="#users_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_users" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#users_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Register new user</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="users_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/users</h4></div><div class="modal-body"><div class="alert alert-info"><p>Register new user</p></div><ul class="nav nav-tabs"><li class="active"><a href="#users_post_request" data-toggle="tab">Request</a></li><li><a href="#users_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="users_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Examples</strong>:</p><pre><code>{
+	"login": "login_for_new_user_123",
+	"password": "psWd45125-Akb",
+	"name": "Ivan Ivanov",
+	"age": 32,
+	"phoneNumber": "89161233030"
+}</code></pre></div><div class="tab-pane" id="users_post_response"><h2>HTTP status code <a href="http://httpstatus.es/201" target="_blank">201</a></h2><p>User successfully registered</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Examples</strong>:</p><pre><code>{
+  "success": true
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><p>Incorrect user model</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Examples</strong>:</p><pre><code>{
+  "msg": "bad_user_model",
+  "success": false
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/409" target="_blank">409</a></h2><p>User already exists in system</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Examples</strong>:</p><pre><code>{
+  "msg": "user_already_exists",
+  "success": false
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Examples</strong>:</p><pre><code>{
+  "msg": "internal_server_error",
+  "success": false
+}</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_users_movies"><span class="parent">/users</span>/movies</a> <span class="methods"><a href="#users_movies_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_users_movies" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#users_movies_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>list of movies rented by the user</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="users_movies_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/users</span>/movies</h4></div><div class="modal-body"><div class="alert alert-info"><p>list of movies rented by the user</p></div><ul class="nav nav-tabs"><li class="active"><a href="#users_movies_get_request" data-toggle="tab">Request</a></li><li><a href="#users_movies_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="users_movies_get_request"><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em>required (string)</em><p>Header with accessToken (<strong>JSON web token</strong>).</p></li></ul><h3>Query Parameters</h3><ul><li><strong>offset</strong>: <em>(integer - default: 0)</em><p>Skip over a number of elements by specifying an offset value for the query</p></li><li><strong>limit</strong>: <em>(integer - default: 10)</em><p>Limit the number of elements on the response</p></li></ul></div><div class="tab-pane" id="users_movies_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>List of movies rented by the user returned with success code.</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Examples</strong>:</p><pre><code>{
+  "items": [
+    {
+      "id": 1,
+      "name": "Allied",
+      "year": 1999,
+      "genre": "Adventure"
+    },
+    {
+      "id": 2,
+      "name": "Moana",
+      "year": 2004,
+      "genre": "Crime"
+    },
+    {
+      "id": 3,
+      "name": "Fantastic Beasts and Where to Find Them",
+      "year": 1999,
+      "genre": "Drama"
+    },
+    {
+      "id": 4,
+      "name": "Underworld: Blood Wars",
+      "year": 1973,
+      "genre": "Historical"
+    },
+    {
+      "id": 5,
+      "name": "Bad Santa 2",
+      "year": 1999,
+      "genre": "Historical"
+    },
+    {
+      "id": 6,
+      "name": "Incarnate",
+      "year": 2016,
+      "genre": "Paranoid"
+    }
+  ],
+  "limit": 10,
+  "offset": 0,
+  "success": true,
+  "total": 6
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><p>Incorrect data in limit or offset parameters. Should be integer.</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Examples</strong>:</p><pre><code>{
+  "msg": "bad_limit_offset_format",
+  "success": false
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>User token is not valid</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Examples</strong>:</p><pre><code>{
+  "msg": "bad_token",
+  "success": false
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Examples</strong>:</p><pre><code>{
+  "msg": "internal_server_error",
+  "success": false
+}</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_users_movies__movieid_"><span class="parent">/users/movies</span>/{movieId}</a> <span class="methods"><a href="#users_movies__movieid__post"><span class="badge badge_post">post</span></a> <a href="#users_movies__movieid__delete"><span class="badge badge_delete">delete</span></a></span></h4></div><div id="panel_users_movies__movieid_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#users_movies__movieid__post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Rent movie</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#users_movies__movieid__delete'" class="list-group-item"><span class="badge badge_delete">delete</span><div class="method_description"><p>Cancel the movie&#39;s rent</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="users_movies__movieid__post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/users/movies</span>/{movieId}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Rent movie</p></div><ul class="nav nav-tabs"><li class="active"><a href="#users_movies__movieid__post_request" data-toggle="tab">Request</a></li><li><a href="#users_movies__movieid__post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="users_movies__movieid__post_request"><h3>URI Parameters</h3><ul><li><strong>movieId</strong>: <em>required (number)</em></li></ul><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em>required (string)</em><p>Header with accessToken (<strong>JSON web token</strong>).</p></li></ul></div><div class="tab-pane" id="users_movies__movieid__post_response"><h2>HTTP status code <a href="http://httpstatus.es/201" target="_blank">201</a></h2><p>Movie successfully rented by user</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Examples</strong>:</p><pre><code>{
+  "success": true
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><p>Incorrect MovieId format. Should be integer value.</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Examples</strong>:</p><pre><code>{
+  "msg": "bad_movie_id_format",
+  "success": false
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>User token is not valid</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Examples</strong>:</p><pre><code>{
+  "msg": "bad_token",
+  "success": false
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Requested movie not found</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Examples</strong>:</p><pre><code>{
+  "msg": "movie_not_found",
+  "success": false
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/409" target="_blank">409</a></h2><p>User already rented requested movie</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Examples</strong>:</p><pre><code>{
+  "msg": "person_movie_already_exists",
+  "success": false
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Examples</strong>:</p><pre><code>{
+  "msg": "internal_server_error",
+  "success": false
+}</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="users_movies__movieid__delete"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete</span> <span class="parent">/users/movies</span>/{movieId}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Cancel the movie&#39;s rent</p></div><ul class="nav nav-tabs"><li class="active"><a href="#users_movies__movieid__delete_request" data-toggle="tab">Request</a></li><li><a href="#users_movies__movieid__delete_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="users_movies__movieid__delete_request"><h3>URI Parameters</h3><ul><li><strong>movieId</strong>: <em>required (number)</em></li></ul><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em>required (string)</em><p>Header with accessToken (<strong>JSON web token</strong>).</p></li></ul></div><div class="tab-pane" id="users_movies__movieid__delete_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Movie&#39;s rent is canceled successfully</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Examples</strong>:</p><pre><code>{
+  "success": true
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><p>Incorrect MovieId format. Should be integer value.</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Examples</strong>:</p><pre><code>{
+  "msg": "bad_movie_id_format",
+  "success": false
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>User token is not valid</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Examples</strong>:</p><pre><code>{
+  "msg": "bad_token",
+  "success": false
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Requested movie is not rented by user</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Examples</strong>:</p><pre><code>{
+  "msg": "user_movie_not_found",
+  "success": false
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Examples</strong>:</p><pre><code>{
+  "msg": "internal_server_error",
+  "success": false
+}</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="col-md-3"><div id="sidebar" class="hidden-print affix" role="complementary"><ul class="nav nav-pills nav-stacked"><li><a href="#session">/session</a></li><li><a href="#movies">/movies</a></li><li><a href="#users">/users</a></li></ul></div></div></div></div></body></html>

@@ -1,0 +1,9 @@
+{
+  "Host": "127.0.0.1",
+  "Port": "5432",
+  "Dbname": "users_movies_db",
+  "Sslmode": "disable",
+  "User": "ivan_ivanov",
+  "Password": "",
+  "SessionKeysPath": "contrib/sessionKeys"
+}

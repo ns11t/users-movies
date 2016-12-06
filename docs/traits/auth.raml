@@ -1,0 +1,14 @@
+headers:
+  Authorization:
+    description: Header with accessToken (**JSON web token**).
+    type: string
+    required: true
+responses:
+  401:
+    description: User token is not valid
+    body:
+      application/json:
+        example: {
+                    "msg": "bad_token",
+                    "success": false
+                 }

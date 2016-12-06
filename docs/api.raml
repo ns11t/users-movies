@@ -1,0 +1,212 @@
+#%RAML 1.0
+title: Users-Movies
+version: v1
+baseUri: http://{host}:{port}/api/{version}
+protocols:
+  - HTTP
+
+traits:
+  paged: !include traits/paged.raml
+  auth: !include traits/auth.raml
+
+/session:
+  post:
+    description: Generate new user token
+    body:
+      application/json:
+        example: {
+                 	"login": "login_for_new_user_123",
+                 	"password": "psWd45125-Akb"
+                 }
+    responses:
+      201:
+        description: New token generated
+        body:
+          application/json:
+            example: {
+                       "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0ODEyMDQyMjksInVzZXJpZCI6InRlc3RfbG9naW41YTExMjMxIn0.qpcDzeclvUl421YoU5OH8A1-mC6uul44OOdS9f0MN4R-oWgHEmDuuevUkQU4RbvBYKg1-FE_F7bhqL9O4dNodmTXhSy7-NL8Nzc_tnd1Y2gPsPIwOSTi38UphOirK2WsSv340KyFmfdr3uHOgRlBpGEGSTQaJdnmv5L3zCKvA1qLT4HKaZuOjlrym4HR7Ho3rsuGvu88rFHUjUebYZ9sYZMhZCZteM7FcOU3xEkt0r5JoJ_YJTNGSHv8BrodZsxhDV6WfyzrxaASDk__jfidofC9rfW5hKUzwb9tKB6MPd8oS-1YPFSV80dkU6XoCjLDAfViriIpko-jESN1uIhf6Q"
+                     }
+      400:
+        description: Incorrect user model
+        body:
+          application/json:
+            example: !include examples/bad_user_model.json
+      401:
+        description: Given password is incorrect
+        body:
+          application/json:
+            example: {
+                       "msg": "user_incorrect_password",
+                       "success": false
+                     }
+      404:
+        description: User is not registered yet
+        body:
+          application/json:
+            example: {
+                       "msg": "user_not_found",
+                       "success": false
+                     }
+      500:
+        body:
+          application/json:
+            example: !include examples/internal_server_error.json
+
+/movies:
+  get:
+    description: Search movies by genre or year
+    is: [paged]
+    queryParameters:
+      genres:
+        displayName: Movie genres
+        description: Comma-separated list of movie genres
+        type: string
+        required: false
+      year:
+        displayName: Movie year
+        description: Integer value of movie's year
+        type: number
+        required: false
+    responses:
+      200:
+        description: Search results returned with success code.
+        body:
+          application/json:
+            example: !include examples/movie_search_response.json
+      400:
+        description: Year parameter value should be integer
+        body:
+          application/json:
+            example: {
+                        "msg": "bad_movie_year_format",
+                        "success": false
+                     }
+      500:
+        body:
+          application/json:
+            example: !include examples/internal_server_error.json
+
+/users:
+  post:
+    description: Register new user
+    body:
+      application/json:
+        example: !include examples/user_to_register.json
+    responses:
+      201:
+        description: User successfully registered
+        body:
+          application/json:
+            example: !include examples/success.json
+      400:
+        description: Incorrect user model
+        body:
+          application/json:
+            example: !include examples/bad_user_model.json
+      409:
+        description: User already exists in system
+        body:
+          application/json:
+            example: {
+                       "msg": "user_already_exists",
+                       "success": false
+                     }
+      500:
+        body:
+          application/json:
+            example: !include examples/internal_server_error.json
+  /movies:
+    get:
+      description: list of movies rented by the user
+      is: [paged,auth]
+      responses:
+        200:
+          description: List of movies rented by the user returned with success code.
+          body:
+            application/json:
+              example: !include examples/movie_search_response.json
+        400:
+          description: Incorrect data in limit or offset parameters. Should be integer.
+          body:
+            application/json:
+              example: {
+                          "msg": "bad_limit_offset_format",
+                          "success": false
+                       }
+        500:
+          body:
+            application/json:
+              example: !include examples/internal_server_error.json
+
+    /{movieId}:
+      uriParameters:
+        movieId:
+          displayName: Movie ID
+          type: number
+      post:
+        description: Rent movie
+        is: [auth]
+        responses:
+          201:
+            description: Movie successfully rented by user
+            body:
+              application/json:
+                example: !include examples/success.json
+          400:
+            description: Incorrect MovieId format. Should be integer value.
+            body:
+              application/json:
+                example: {
+                           "msg": "bad_movie_id_format",
+                           "success": false
+                         }
+          404:
+            description: Requested movie not found
+            body:
+              application/json:
+                example: {
+                           "msg": "movie_not_found",
+                           "success": false
+                         }
+          409:
+            description: User already rented requested movie
+            body:
+              application/json:
+                example: {
+                           "msg": "person_movie_already_exists",
+                           "success": false
+                         }
+          500:
+            body:
+              application/json:
+                example: !include examples/internal_server_error.json
+
+      delete:
+        description: Cancel the movie's rent
+        is: [auth]
+        responses:
+          200:
+            description: Movie's rent is canceled successfully
+            body:
+              application/json:
+                example: !include examples/success.json
+          400:
+            description: Incorrect MovieId format. Should be integer value.
+            body:
+              application/json:
+                example: {
+                           "msg": "bad_movie_id_format",
+                           "success": false
+                         }
+          404:
+            description: Requested movie is not rented by user
+            body:
+              application/json:
+                example: {
+                           "msg": "user_movie_not_found",
+                           "success": false
+                         }
+          500:
+            body:
+              application/json:
+                example: !include examples/internal_server_error.json
